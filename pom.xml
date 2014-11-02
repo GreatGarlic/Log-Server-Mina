@@ -1,21 +1,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.server.log.mina</groupId>
-  <artifactId>Log-Server-Mina</artifactId>
-  <version>0.1</version>
-  <packaging>jar</packaging>
+	<groupId>org.server.log.mina</groupId>
+	<artifactId>Log-Server-Mina</artifactId>
+	<version>0.1</version>
+	<packaging>jar</packaging>
 
-  <name>Log-Server-Mina</name>
- <properties>
+	<name>Log-Server-Mina</name>
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
 		<!--网络应用程序框架 -->
-		
-		
+		<dependency>
+			<groupId>org.apache.mina</groupId>
+			<artifactId>mina-core</artifactId>
+			<version>3.0.0-M2</version>
+		</dependency>
 		<!--Disruptor内存无锁消息队列框架 -->
 		<dependency>
 			<groupId>com.lmax</groupId>
@@ -27,6 +30,24 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>1.1.2</version>
+		</dependency>
+		<!--Spring框架 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>4.1.1.RELEASE</version>
+		</dependency>
+		<!--Spring面向切面编程依赖组件(比如声明式事务) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>4.1.1.RELEASE</version>
+		</dependency>
+		<!--Spring单元测试框架 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>4.1.1.RELEASE</version>
 		</dependency>
 		<!--单元测试框架 -->
 		<dependency>
