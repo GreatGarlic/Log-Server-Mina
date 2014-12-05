@@ -8,15 +8,14 @@
 
 	<context:annotation-config />
 
-
 	<!--业务处理路由器 -->
 	<bean id="dispatchHandler" class="org.server.log.mina.handler.DispatchHandler" />
-
 	<!--filterBeans -->
 	<bean id="codecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter">
 		<constructor-arg>
-			<bean class="org.apache.mina.filter.codec.textline.TextLineCodecFactory">
-				<constructor-arg index="0" value="#{T(java.nio.charset.Charset).forName('GB2312')}"></constructor-arg>
+			<bean class="org.server.log.mina.codec.TextLineCodecFactory">
+				<constructor-arg index="0" value="#{T(java.nio.charset.Charset).forName('GB2312')}" />
+				<constructor-arg index="1" value="1024"/>
 			</bean>
 		</constructor-arg>
 	</bean>
@@ -35,7 +34,8 @@
 	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
 		<property name="customEditors">
 			<map>
-				<entry key="java.net.SocketAddress" value="org.apache.mina.integration.beans.InetSocketAddressEditor" />
+				<entry key="java.net.SocketAddress"
+					value="org.apache.mina.integration.beans.InetSocketAddressEditor" />
 			</map>
 		</property>
 	</bean>
