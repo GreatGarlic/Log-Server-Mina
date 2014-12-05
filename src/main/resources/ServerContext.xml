@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+
+
+	<!--业务处理路由器 -->
+	<bean id="dispatchHandler" class="org.server.log.mina.handler.DispatchHandler" />
+
+	<!--filterBeans -->
+	<bean id="codecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter">
+		<constructor-arg>
+			<bean class="org.apache.mina.filter.codec.textline.TextLineCodecFactory">
+				<constructor-arg index="0" value="#{T(java.nio.charset.Charset).forName('GB2312')}"></constructor-arg>
+			</bean>
+		</constructor-arg>
+	</bean>
+
+	<!-- 过滤器链 -->
+	<!-- The filter chain. -->
+	<bean id="filterChainBuilder"
+		class="org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder">
+		<property name="filters">
+			<map>
+				<entry key="codecFilter" value-ref="codecFilter" />
+			</map>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="java.net.SocketAddress" value="org.apache.mina.integration.beans.InetSocketAddressEditor" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- mina主服务 -->
+	<bean id="logServer"
+		class="org.apache.mina.transport.socket.nio.NioDatagramAcceptor"
+		init-method="bind" destroy-method="unbind">
+		<property name="defaultLocalAddress" value=":${udp.port}" />
+		<property name="filterChainBuilder" ref="filterChainBuilder" />
+		<property name="handler" ref="dispatchHandler" />
+	</bean>
+
+</beans>
