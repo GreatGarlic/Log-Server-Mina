@@ -1,6 +1,8 @@
 Log-Server-Mina
 ===============
 
-Mina2.x+Spring4.x+LogBack1.1.2
+基于Mina2.x+Spring4.x+LogBack1.1.2+Disruptor3.3
 
-基于Mina2.x的UDP日志服务器
+
+实现的UDP协议异步写日志文件日志服务器
+
