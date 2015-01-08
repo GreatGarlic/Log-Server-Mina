@@ -38,6 +38,7 @@ public class DispatchHandler extends IoHandlerAdapter {
 	@Override
 	public void exceptionCaught(IoSession session, Throwable cause) {
 		LOGGER.error("通讯异常:", cause);
+		session.close(true);
 	}
 
 }
