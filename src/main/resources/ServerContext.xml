@@ -8,17 +8,37 @@
 
 	<context:annotation-config />
 
-	<!--业务处理路由器 -->
-	<bean id="dispatchHandler" class="org.server.log.mina.handler.DispatchHandler" />
+	
+	
+	
+	
 	<!--filterBeans -->
+<!-- 	<bean id="codecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter"> -->
+<!-- 		<constructor-arg> -->
+<!-- 			<bean class="org.server.log.mina.codec.TextLineCodecFactory"> -->
+<!-- 				<constructor-arg index="0" -->
+<!-- 					value="#{T(java.nio.charset.Charset).forName('GB2312')}" /> -->
+<!-- 				<constructor-arg index="1" value="1024" /> -->
+<!-- 			</bean> -->
+<!-- 		</constructor-arg> -->
+<!-- 	</bean> -->
+
 	<bean id="codecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter">
 		<constructor-arg>
-			<bean class="org.server.log.mina.codec.TextLineCodecFactory">
-				<constructor-arg index="0" value="#{T(java.nio.charset.Charset).forName('GB2312')}" />
-				<constructor-arg index="1" value="1024"/>
+			<bean class="org.server.log.mina.codec.BytesStreamCodecFactory">
+				<property name="decoder">
+					<bean class="org.server.log.mina.codec.BytesToMessageDecoder" />
+				</property>
+				<property name="encoder">
+					<bean class="org.server.log.mina.codec.MessageToBytesEncoder" />
+				</property>
 			</bean>
 		</constructor-arg>
 	</bean>
+
+
+	<!--业务处理路由器 -->
+	<bean id="dispatchHandler" class="org.server.log.mina.handler.DispatchHandler" />
 
 	<!-- 过滤器链 -->
 	<!-- The filter chain. -->
@@ -48,5 +68,14 @@
 		<property name="filterChainBuilder" ref="filterChainBuilder" />
 		<property name="handler" ref="dispatchHandler" />
 	</bean>
+	
+<!-- 	<bean id="logServer" -->
+<!-- 		class="org.apache.mina.transport.socket.nio.NioSocketAcceptor" -->
+<!-- 		init-method="bind" destroy-method="unbind"> -->
+<!-- 		<property name="defaultLocalAddress" value=":${udp.port}" /> -->
+<!-- 		<property name="filterChainBuilder" ref="filterChainBuilder" /> -->
+<!-- 		<property name="handler" ref="dispatchHandler" /> -->
+<!-- 	</bean> -->
+	
 
 </beans>

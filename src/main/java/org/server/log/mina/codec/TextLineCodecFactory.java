@@ -38,8 +38,8 @@ public class TextLineCodecFactory implements ProtocolCodecFactory {
 	 *            The charset to use in the encoding and decoding
 	 */
 	public TextLineCodecFactory(Charset charset,Integer maxLineLength) {
-		encoder = new TextLineEncoder(charset, LineDelimiter.UNIX);
-		decoder = new TextLineDecoder(charset, LineDelimiter.AUTO);
+		encoder = new TextLineEncoder(Charset.forName("GB2312"), LineDelimiter.UNIX);
+		decoder = new TextLineDecoder(Charset.forName("GB2312"), LineDelimiter.CRLF);
 		setDecoderMaxLineLength(maxLineLength*1024);
 		setEncoderMaxLineLength(maxLineLength*1024);
 	}

@@ -20,13 +20,8 @@ public class DispatchHandler extends IoHandlerAdapter {
 
 	@Override
 	public void messageReceived(IoSession session, Object message) {
-		String msg=((String)message).toLowerCase();
-		int state=msg.indexOf("error");
-		if(state==-1){
-			LOGGER.debug("收到日志数据:"+(String)message);
-		}else {
-			LOGGER.error("收到报错数据:"+(String)message);
-		}
+		System.out.println((String)message);
+//		byte[] data=(byte[])message;
 	}
 
 	@Override

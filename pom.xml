@@ -203,4 +203,23 @@
             </plugin>
         </plugins>
     </build>
+    
+    <!-- OSChina的Maven中心仓库 -->
+	<repositories>
+		<repository>
+			<id>osc</id>
+			<url>http://maven.oschina.net/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>osc_thirdparty</id>
+			<url>http://maven.oschina.net/content/repositories/thirdparty/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>osc</id>
+			<url>http://maven.oschina.net/content/groups/public/</url>
+		</pluginRepository>
+	</pluginRepositories>
+    
 </project>
